@@ -8,12 +8,13 @@ public class RegistroResumos {
 	
 	public RegistroResumos(int capacidadeDeResumos) {
 		this.capacidade = capacidadeDeResumos;
-		this.resumos = new LinkedHashMap<String, Resumo>();
+		this.resumos = new LimitedHashMap<String, Resumo>(this.capacidade);
 		this.contagem = 0; 
 	}
-	public void adicionaResumo(String tema, String conteudo) {
+	public void adicionaResumo(String tema, String conteudo) throws ResumoJaAdicionadoException {
+		if(this.resumos.containsKey(tema))
+			throw new ResumoJaAdicionadoException("Resumo já registrado.");
 		Resumo novoResumo = new Resumo(tema, conteudo);
-		this.
-		
+		this.resumos.put(tema, novoResumo);
 	}
 }
