@@ -8,12 +8,12 @@ public class Aluno {
 	private int cra;
 	private RegistroResumos resumos;
 	private Descanso descanso;
-	private Map<String, RegistroTempoOnline> tempoOnline;
+	private Map<String, RegistroTempoOnline> tempoOnlinePorDisciplina;
 	
 	public Aluno(String nome, String matricula) {
 		this.nome = nome;
 		this.matricula = matricula;
 		this.disciplinas = new HashMap<String, Disciplina>();
-		this.tempoOnline = new HashMap<String, RegistroTempoOnline>();
+		this.tempoOnlinePorDisciplina = new HashMap<String, RegistroTempoOnline>();
 	}
 }
