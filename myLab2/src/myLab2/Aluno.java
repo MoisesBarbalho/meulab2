@@ -5,15 +5,15 @@ public class Aluno {
 	private String matricula;
 	private String nome;
 	private Map<String, Disciplina> disciplinas;
-	private Map<String, int[]> boletim;
 	private int cra;
 	private RegistroResumos resumos;
 	private Descanso descanso;
+	private Map<String, RegistroTempoOnline> tempoOnline;
 	
 	public Aluno(String nome, String matricula) {
 		this.nome = nome;
 		this.matricula = matricula;
 		this.disciplinas = new HashMap<String, Disciplina>();
-		this.boletim = new HashMap<String, int[]>();
+		this.tempoOnline = new HashMap<String, RegistroTempoOnline>();
 	}
 }

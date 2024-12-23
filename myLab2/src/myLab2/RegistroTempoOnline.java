@@ -7,7 +7,7 @@ public class RegistroTempoOnline {
 	
 	public RegistroTempoOnline(Disciplina disciplina) {
 		this.disciplina = disciplina;
-		this.tempoOnlineEsperado = this.disciplina.getHorasTotais() * 2;
+		this.tempoOnlineEsperado = this.disciplina.getCargaHoraria().getCargaTotal() * 2;
 		this.tempoOnline = 0;
 	}
 	public void adicionaTempoOnline(int tempo) {

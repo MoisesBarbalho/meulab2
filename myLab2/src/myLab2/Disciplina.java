@@ -7,7 +7,6 @@ public class Disciplina {
 	private double[] notas;
 	private int[] pesos;
 	private CargaHoraria cargaHoraria;
-	private RegistroTempoOnline tempoOnline;
 	
 	public Disciplina(String nomeDisciplina, int numeroDeNotas, int[] pesos, int carga) {
 		this.nomeDaDisciplina = nomeDisciplina;
@@ -35,20 +34,22 @@ public class Disciplina {
 	public String getNome() {
 		return this.nomeDaDisciplina;
 	}
-	public void cadastraHoras(int horas) {
-		this.cargaHoraria.registraHoras(horas);
+	public String showNotas() {
+		return Arrays.toString(notas);
+	}
+	public String showMedia() {
+		return Double.toString(this.tiraMedia());
+	}
+	public CargaHoraria getCargaHoraria() {
+		return this.cargaHoraria;
 	}
 	public void cadastraNota(int qual, double valor) {
 		this.notas[qual - 1] = valor * this.pesos[qual - 1];
 	}
-	public int getHorasTotais() {
-		int horas = this.cargaHoraria.getCargaTotal();
-		return horas;
-	}
 	public boolean aprovado() {
 		return (this.tiraMedia() >= 7);
 	}
-	private double tiraMedia() {
+	public double tiraMedia() {
 		int somaPesos = Arrays.stream(this.pesos).sum();
 		double somaNotas = Arrays.stream(this.notas).sum();
 		return somaNotas / somaPesos;
