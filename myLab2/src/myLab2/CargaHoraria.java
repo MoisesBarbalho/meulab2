@@ -34,7 +34,7 @@ public class CargaHoraria {
 	}
 	@Override
 	public String toString() {
-		String relatorio = "Horas: "+this.cadastradas+"h/" + this.carga+"h"+" ("+this.cumpridas()+"%)";
+		String relatorio = "Carga Horaria: "+this.cadastradas+"h/" + this.carga+"h"+" ("+this.cumpridas()+"%)";
 		return relatorio;
 	}
 	@Override

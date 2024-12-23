@@ -34,8 +34,20 @@ public class Disciplina {
 	public String getNome() {
 		return this.nomeDaDisciplina;
 	}
+	public double[] getNotas() {
+		return this.notas;
+	}
+	public int[] getPesos() {
+		return this.pesos;
+	}
+	public double getMedia() {
+		return this.tiraMedia();
+	}
 	public String showNotas() {
-		return Arrays.toString(notas);
+		return Arrays.toString(this.notas);
+	}
+	public String showPesos() {
+		return Arrays.toString(this.pesos);
 	}
 	public String showMedia() {
 		return Double.toString(this.tiraMedia());
@@ -47,13 +59,18 @@ public class Disciplina {
 		this.notas[qual - 1] = valor * this.pesos[qual - 1];
 	}
 	public boolean aprovado() {
-		return (this.tiraMedia() >= 7);
+		if(this.cargaHoraria.realizou()) return (this.tiraMedia() >= 7);
+		else return false;
+	}
+	public String getSituacao() {
+		if(this.cargaHoraria.realizou()) {
+			return (this.aprovado()) ? "Aprovado(a)"  : "Reprovado(a)";
+		} else return "Cursando";
 	}
 	public double tiraMedia() {
 		int somaPesos = Arrays.stream(this.pesos).sum();
 		double somaNotas = Arrays.stream(this.notas).sum();
-		return somaNotas / somaPesos;
-		
+		return somaNotas / somaPesos;	
 	}
 	private void ajustaPesos() {
         for (int i = 0; i < this.pesos.length; i++) {
@@ -62,4 +79,35 @@ public class Disciplina {
             }
         }
     }
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("--Disciplina: " + this.nomeDaDisciplina + "--\n")
+		.append("-Notas: " +this.showNotas() + ".\n")
+		.append("-Pesos: " +this.showPesos() + ".\n")
+		.append("-Média: " +this.showMedia() + ".\n")
+		.append("-Carga Horaria: " + this.cargaHoraria.toString())
+		.append("Situação: " + this.getSituacao());
+		return sb.toString();
+	}
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Disciplina)) return false;
+		if(o == this) return true;
+		
+		Disciplina oDi = (Disciplina) o;
+		if(this.nomeDaDisciplina.equals(oDi.getNome())) {
+			if(this.cargaHoraria.getCargaTotal() == this.getCargaHoraria().getCargaTotal()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
+	public int hashCode() {
+		int hash = 19;
+		hash = 31 * hash + this.nomeDaDisciplina.hashCode();
+		hash += this.cargaHoraria.getCargaTotal();
+		return hash;
+	}
 }
