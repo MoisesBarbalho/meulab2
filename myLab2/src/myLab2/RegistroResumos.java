@@ -4,16 +4,14 @@ import java.util.*;
 public class RegistroResumos {
 	private Map<String, Resumo> resumos;
 	private  int capacidade;
-	private int contagem;
 	
 	public RegistroResumos(Aluno aluno, int capacidadeDeResumos) {
 		this.capacidade = capacidadeDeResumos;
 		this.resumos = new LimitedHashMap<String, Resumo>(this.capacidade);
-		this.contagem = this.resumos.size(); 
 	}
-	public void adicionaResumo(String tema, String conteudo) throws ResumoJaAdicionadoException {
+	public void adicionaResumo(String tema, String conteudo) {
 		if(this.resumos.containsKey(tema))
-			throw new ResumoJaAdicionadoException("Resumo já registrado.");
+			throw new UnsupportedOperationException("Resumo já registrado.");
 		Resumo novoResumo = new Resumo(tema, conteudo);
 		this.resumos.put(tema, novoResumo);
 	}
@@ -23,25 +21,28 @@ public class RegistroResumos {
 		this.resumos.remove(tema);
 	}
 	public int conta() {
-		return this.contagem;
+		return this.resumos.size();
 	}
 	public String[] pegaResumos() {
-		return (String[])this.resumos.values()
+		return this.resumos.values()
 				.stream()
-				.map(Resumo::toString).toArray();
+				.map(Resumo::toString).toArray(String[]::new);
 	}
 	public String imprimeResumos() {
-		return String.join(" | ", this.pegaResumos());
+		String resumosRegistrados = String.join(" | ", this.pegaResumos());
+		return "Resumos Registrados: " + resumosRegistrados;
 	}
 	public boolean temResumo(String tema) {
 		return this.resumos.containsKey(tema);
 	}
 	public String[] buscaResumo(String chaveDeBusca) {
 		String chave = chaveDeBusca.toLowerCase();
-		String[] encontrados = (String[]) this.resumos.values()
-				.stream()
-				.filter(resumo -> resumo.getConteudo().toLowerCase().contains(chave))
-				.toArray();
+		String[] encontrados =  this.resumos.values().stream()
+				.filter(resumo -> resumo
+						.getConteudo()
+						.toLowerCase().contains(chave))
+				.map(Resumo::getTema).toArray(String[]::new);
+		Arrays.sort(encontrados);
 		return encontrados;
 	}
 	private String[] getTemas() {
@@ -53,7 +54,7 @@ public class RegistroResumos {
 		StringBuilder sb = new StringBuilder();
 		sb.append("---Registro de Resumos---\n")
 		.append("Capacidade: " + this.capacidade + "\n")
-		.append("Registrados:" + this.contagem + "\n")
+		.append("Registrados:" + this.resumos.size() + "\n")
 		.append("Temas:\n " + String.join(".\n",this.getTemas()));
 		return sb.toString(); 
 	}

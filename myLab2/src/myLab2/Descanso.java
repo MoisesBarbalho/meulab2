@@ -28,9 +28,9 @@ public class Descanso {
 		this.emoji = emoji;
 	}
 	public String getStatusGeral() {
-		if(this.emoji != null)
+		if(this.emoji != null) {
 			return this.statusGeral + " - " + this.emoji;
-		else return this.statusGeral;
+		} else return this.statusGeral;
 	}
 	private void defineStatusGeral() {
 		String novoStatusGeral;
@@ -39,12 +39,11 @@ public class Descanso {
 			if(horasPorSemana >= 26)
 				novoStatusGeral = "descansado";
 			else novoStatusGeral = "cansado";
-		} 
-		else novoStatusGeral = "cansado";
+		} else novoStatusGeral = "cansado"; 
 			
-		if(!(this.statusGeral.equals(novoStatusGeral)))
+		if(!(this.statusGeral.equals(novoStatusGeral))) {
 			this.emoji = null;
-		
+		}
 		this.statusGeral = novoStatusGeral;
 	}
 
