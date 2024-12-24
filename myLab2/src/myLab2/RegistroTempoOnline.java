@@ -16,9 +16,6 @@ public class RegistroTempoOnline {
 	public int getTempoOnline() {
 		return this.tempoOnline;
 	}
-	public int getTempoOnlineEsperado() {
-		return this.tempoOnlineEsperado;
-	}
 	public void adicionaTempoOnline(int tempo) {
 		this.tempoOnline += tempo;
 	}

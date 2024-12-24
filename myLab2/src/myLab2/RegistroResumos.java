@@ -5,9 +5,15 @@ public class RegistroResumos {
 	private Map<String, Resumo> resumos;
 	private  int capacidade;
 	
-	public RegistroResumos(Aluno aluno, int capacidadeDeResumos) {
+	public RegistroResumos(int capacidadeDeResumos) {
 		this.capacidade = capacidadeDeResumos;
 		this.resumos = new LimitedHashMap<String, Resumo>(this.capacidade);
+	}
+	public RegistroResumos() {
+		this(16);
+	}
+	public Map<String, Resumo> getResumos() {
+		return this.resumos;
 	}
 	public void adicionaResumo(String tema, String conteudo) {
 		if(this.resumos.containsKey(tema))

@@ -29,6 +29,12 @@ public class Disciplina {
 	public CargaHoraria getCargaHoraria() {
 		return this.cargaHoraria;
 	}
+	public Notas getNotas() {
+		return this.notas;
+	}
+	public String showNotas() {
+		return this.notas.toString();
+	}
 	public boolean aprovado() {
 		if(this.cargaHoraria.realizou()) return (this.notas.getMedia() >= 7);
 		else return false;
