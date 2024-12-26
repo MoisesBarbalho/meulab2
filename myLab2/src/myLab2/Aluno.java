@@ -38,6 +38,12 @@ public class Aluno {
 		this.meuCRA = 0;
 		
 	}
+	public String getMatricula() {
+		return this.matricula;
+	}
+	public String getNome() {
+		return this.nome;
+	}
 	public void registrarDisciplina(Disciplina disciplina) {
 		this.disciplinas.put(disciplina.getNome(), disciplina);
 		RegistroTempoOnline tempoOnlineParaDisciplina = new RegistroTempoOnline(disciplina);
@@ -59,9 +65,9 @@ public class Aluno {
 		}
 		return this.tempoOnlinePorDisciplina.get(disciplina);
 	}
-	public void setResumos(int capacidade, boolean tf) {
+	public void setResumos(int capacidade, boolean preservaAntigos) {
 		RegistroResumos novoRegistro = new RegistroResumos(capacidade);
-		if(tf) {
+		if(preservaAntigos) {
 			String[] jaRegistrados = this.meusResumos.pegaResumos();
 			for(String resumoString : jaRegistrados) {
 				if(resumoString != null) {
@@ -81,6 +87,9 @@ public class Aluno {
 	}
 	public Descanso getDescanso() {
 		return this.rotinaDeDescanso;
+	}
+	public double getCRA() {
+		return this.meuCRA;
 	}
 	private void defineCRA() {
 		Iterator<Disciplina> i = this.disciplinas.values().iterator();
